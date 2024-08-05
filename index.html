@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms Jane Doe - Marketing Professional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+        .side-menu {
+            width: 60px;
+            background-color: #ff6347;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            position: fixed;
+            height: 100%;
+            z-index: 1000;
+        }
+        .side-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 20px 0;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        .side-menu a i {
+            font-size: 30px;
+        }
+        .side-menu a:hover {
+            color: #ddd;
+        }
+        .header {
+            text-align: center;
+            width: calc(100% - 60px);
+            margin-left: 60px;
+            padding: 20px 0;
+        }
+        .header img {
+            border-radius: 50%;
+            width: 190px;
+            height: 190px;
+            vertical-align: middle;
+            border: 4px solid #fff;
+            display: block;
+            margin: 0 auto;
+        }
+        .header h1 {
+            font-size: 39px;
+            margin: 10px 0;
+        }
+        .header p {
+            margin: 0;
+            font-size: 20px;
+        }
+        .contact-details {
+            margin: 10px 0;
+        }
+        .contact-details, .social-media {
+            font-size: 35px;
+            color: #555;
+        }
+        .social-media a {
+            color: #ff6347;
+            margin: 0 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 80px;
+        }
+        .download-btn {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .download-btn a {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn a:hover {
+            background-color: #e5533d;
+        }
+        .divider {
+            height: 1px;
+            background-color: #ff6347;
+            margin: 20px 0;
+        }
+        .section {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 40px;
+            border-left: 4px solid #ff6347;
+            padding-left: 20px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #ff6347;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .section h2 i {
+            margin-right: 10px;
+        }
+        .section p, .section ul {
+            margin: 0;
+            line-height: 1.6;
+        }
+        .highlight {
+            background-color: #ffefdb;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .contact-form input, .contact-form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #ff6347;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #e5533d;
+        }
+        .testimonials {
+            position: relative;
+            overflow: hidden;
+        }
+        .testimonial-slide {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .testimonial-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            border-left: 4px solid #ff6347;
+            margin-bottom: 10px;
+        }
+        .testimonial-item p {
+            margin: 0;
+        }
+        .testimonial-item .author {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+          /* Video Popup Styles */
+        .video-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .video-popup iframe {
+            width: 70%;
+            height: 50%;
+            border: none;
+        }
+        .video-popup .close-btn {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            padding: 5px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 60px;
+                width: calc(100% - 60px);
+            }
+        }
+        @media (min-width: 769px) {
+            .side-menu {
+                position: relative;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            .header {
+                width: 100%;
+                margin-left: 0;
+                padding-top: 80px;
+            }
+            .container {
+                margin: 10px auto;
+                margin-top: 150px;
+                margin-left: auto;
+                width: 100%;
+                max-width: 800px;
+            }
+        }
+        .youtube-player {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .youtube-player iframe {
+            width: 560px;
+            height: 315px;
+            max-width: 100%;
+        }
+      
+    </style>
+    <script>
+        // Function to show the video popup after 5 seconds
+        function showVideoPopup() {
+            const videoPopup = document.getElementById('videoPopup');
+            videoPopup.style.display = 'flex';
+            // Automatically start the video playback
+            const iframe = videoPopup.querySelector('iframe');
+            iframe.src += "?autoplay=1"; // Add autoplay parameter
+        }
+
+        // Function to close the video popup
+        function closeVideoPopup() {
+            const videoPopup = document.getElementById('videoPopup');
+            videoPopup.style.display = 'none';
+            // Stop the video playback
+            const iframe = videoPopup.querySelector('iframe');
+            iframe.src = iframe.src.replace("?autoplay=1", ""); // Remove autoplay parameter
+        }
+
+        // Show the video popup 5 seconds after the page loads
+        window.onload = function() {
+            setTimeout(showVideoPopup, 5000);
+        };
+    </script>
+</head>
+<body>
+
+    <div class="side-menu">
+        <a href="#personal-statement"><i class="fas fa-user"></i></a>
+        <a href="#career-objective"><i class="fas fa-bullseye"></i></a>
+        <a href="#relevant-skills"><i class="fas fa-cogs"></i></a>
+        <a href="#work-history"><i class="fas fa-briefcase"></i></a>
+        <a href="#relevant-certificates"><i class="fas fa-certificate"></i></a>
+        <a href="#presentations-publications"><i class="fas fa-file-alt"></i></a>
+        <a href="#professional-associations"><i class="fas fa-users"></i></a>
+        <a href="#languages"><i class="fas fa-language"></i></a>
+        <a href="#education"><i class="fas fa-graduation-cap"></i></a>
+        <a href="#testimonials"><i class="fas fa-comment"></i></a>
+        <a href="#contact"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <div class="header">
+        <img src="https://www.amoahmotorssparelimited.com/wp-content/uploads/2024/08/yut.png" alt="Jane Doe">
+        <h1>Ms Jane Doe</h1>
+        <p>Marketing Professional</p>
+        <div class="contact-details">
+            <p><i class="fas fa-phone"></i> +123 456 7890</p>
+            <p><i class="fas fa-envelope"></i> jane.doe@email.com</p>
+        </div>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+             <div class="divider"></div>
+       <div class="youtube-player">
+            <iframe src="https://www.youtube.com/embed/4WEQtgnBu0I" frameborder="0" allowfullscreen></iframe>
+        </div>
+       <div class="divider"></div>
+              <div class="download-btn">
+            <a href="jane-doe-cv.pdf" download>Download CV</a>
+        </div>
+             <div class="divider"></div>
+    </div>
+    <div class="container">
+        <div id="personal-statement" class="section">
+            <h2><i class="fas fa-user"></i> Personal Statement</h2>
+            <p>I am a passionate and results-driven marketing professional with over 10 years of experience in developing innovative marketing strategies and managing successful campaigns across various industries...</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="career-objective" class="section">
+            <h2><i class="fas fa-bullseye"></i> Career Objective</h2>
+            <p>My goal is to leverage my expertise in digital marketing and brand management to drive growth and increase brand awareness for a forward-thinking organization...</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="relevant-skills" class="section">
+            <h2><i class="fas fa-cogs"></i> Relevant Skills</h2>
+            <ul>
+                <li>Digital Marketing</li>
+                <li>Content Creation</li>
+                <li>SEO/SEM</li>
+                <li>Social Media Management</li>
+                <li>Brand Strategy</li>
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="work-history" class="section">
+            <h2><i class="fas fa-briefcase"></i> Work History</h2>
+            <p><strong>Marketing Manager</strong> at XYZ Company (2015 - Present)</p>
+            <p><strong>Digital Marketing Specialist</strong> at ABC Corp (2010 - 2015)</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="relevant-certificates" class="section">
+            <h2><i class="fas fa-certificate"></i> Relevant Certificates</h2>
+            <p>Google Analytics Certified, HubSpot Content Marketing Certified, Facebook Blueprint Certified...</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="presentations-publications" class="section">
+            <h2><i class="fas fa-file-alt"></i> Presentations & Publications</h2>
+            <p>"The Future of Digital Marketing" - Keynote Speaker at Marketing Summit 2022</p>
+            <p>"Content Marketing Strategies for 2023" - Published in Marketing Today</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="professional-associations" class="section">
+            <h2><i class="fas fa-users"></i> Professional Associations</h2>
+            <p>Member of the American Marketing Association, Digital Marketing Association, Women in Marketing...</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="languages" class="section">
+            <h2><i class="fas fa-language"></i> Languages</h2>
+            <p>English (Native), Spanish (Fluent), French (Intermediate)</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="education" class="section">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <p><strong>MBA in Marketing</strong>, University of Marketing, 2010</p>
+            <p><strong>Bachelor of Science in Business Administration</strong>, ABC University, 2008</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="testimonials" class="section">
+            <h2><i class="fas fa-comment"></i> Testimonials</h2>
+            <div class="testimonials">
+                <div class="testimonial-slide">
+                    <div class="testimonial-item">
+                        <p>"Jane is a true marketing expert. Her strategies have consistently delivered exceptional results for our company."</p>
+                        <p class="author">- John Smith, CEO of XYZ Company</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Working with Jane has been a pleasure. She is highly creative, dedicated, and always exceeds expectations."</p>
+                        <p class="author">- Sarah Johnson, Marketing Director at ABC Corp</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="contact" class="section">
+            <h2><i class="fas fa-envelope"></i> Contact</h2>
+            <form class="contact-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+  
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 Ms Jane Doe. All rights reserved.</p>
+    </div>
+
+    <!-- Video Popup -->
+    <div id="videoPopup" class="video-popup">
+        <div class="close-btn" onclick="closeVideoPopup()">×</div>
+        <iframe src="https://www.youtube.com/embed/4WEQtgnBu0I" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+</body>
+</html>
